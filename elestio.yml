@@ -6,22 +6,17 @@ ports:
     targetIP: "172.17.0.1"
     public: true
     path: "/"
-    isAuth: false
-    # login: "root"
-    # password: "random_password"
-    # loginTitle: "InvokeAI"
+    isAuth: true
+    login: "root"
+    password: "random_password"
+    loginTitle: "InvokeAI"
 environments:
   - key: "SOFTWARE_VERSION_TAG"
     value: "latest"
   - key: "ADMIN_PASSWORD"
     value: "random_password"
-  - key: "HOST_INVOKEAI_ROOT"
-    value: "./invokeai"
   - key: "INVOKEAI_ROOT "
-    value: "./"
-  - key: "CONTAINER_UID "
-    value: "1000"
-
+    value: "/opt/app/[PIPELINE_NAME]/invokeai"
 config:
   runTime: "dockerCompose"
   version: ""

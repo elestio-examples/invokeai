@@ -1,21 +1,23 @@
-# Copyright (c) 2023 Eugene Brodsky https://github.com/ebr
-
 version: "3.8"
 
 services:
   invokeai-nvidia:
     tty: true
     stdin_open: true
-    image: "invokeai/invokeai:latest"
+    image: ghcr.io/invoke-ai/invokeai:${SOFTWARE_VERSION_TAG}
     restart: always
     env_file:
       - .env
     environment:
-      - INVOKEAI_ROOT=/invokeai
-      - HF_HOME=/huggingface
+      - INVOKEAI_ROOT
+      - HF_HOME
     volumes:
-      - ./invokeai:${INVOKEAI_ROOT:-/invokeai}
-      - ./:/invokeai/.cache/huggingface
+      - type: bind
+        source: ${HOST_INVOKEAI_ROOT:-${INVOKEAI_ROOT:-~/invokeai}}
+        target: ${INVOKEAI_ROOT:-/invokeai}
+      - ${HF_HOME:-~/.cache/huggingface}:${HF_HOME:-/invokeai/.cache/huggingface}
+      - ${INVOKEAI_MODELS_DIR:-${INVOKEAI_ROOT:-/invokeai/models}}
+      - ${INVOKEAI_MODELS_CONFIG_PATH:-${INVOKEAI_ROOT:-/invokeai/configs/models.yaml}}
     ports:
       - "172.17.0.1:58492:9090"
     ## For Nvidia GPU's - You probably want to uncomment this
