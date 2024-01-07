@@ -17,6 +17,10 @@ environments:
     value: "random_password"
   - key: "INVOKEAI_ROOT "
     value: "/opt/app/[PIPELINE_NAME]/invokeai"
+  - key: "INVOKEAI_MODELS_DIR "
+    value: "/opt/app/[PIPELINE_NAME]/invokeai/models"
+  - key: "INVOKEAI_MODELS_CONFIG_PATH "
+    value: "/opt/app/[PIPELINE_NAME]/invokeai/config"
 config:
   runTime: "dockerCompose"
   version: ""
