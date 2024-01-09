@@ -1,6 +1,8 @@
 #set env vars
 set -o allexport; source .env; set +o allexport;
 
+mkdir -p ./invokeai
+
 lshw_output=$(lshw)
 
 if [[ $lshw_output == *nvidia* ]]; then
